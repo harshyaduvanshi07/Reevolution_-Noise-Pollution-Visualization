@@ -1,25 +1,26 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+import numpy as np
 
 # Load the data
-data_path = 'data/noise_data_raw.csv'
-noise_data = pd.read_csv(data_path)
+data = pd.read_csv('data/noise_data_raw.csv')
 
-# Display basic information about the dataset
-print(noise_data.info())
-print(noise_data.describe())
+# Display the first few rows of the dataset
+print(data.head())
 
-# Visualize noise levels by category
-plt.figure(figsize=(10, 6))
-sns.boxplot(x='Category', y='Noise_Level', data=noise_data)
-plt.title('Noise Levels by Category in Mumbai')
-plt.xlabel('Category')
-plt.ylabel('Noise Level (dB)')
-plt.xticks(rotation=45)
-plt.savefig('visuals/noise_visualization.png')
-plt.show()
+# Calculate Leq
+def calculate_leq(noise_levels):
+    return 10 * np.log10(np.mean(10 ** (noise_levels / 10))
 
-# Save summary statistics to CSV
-summary_stats = noise_data.groupby('Category')['Noise_Level'].describe()
-summary_stats.to_csv('output/noise_summary_statistics.csv')
+data['Leq'] = data['Noise_Level'].apply(calculate_leq)
+
+# Calculate Noise Climate (NC)
+data['NC'] = data['L10'] - data['L90']
+
+# Calculate Noise Pollution Level (NP)
+data['NP'] = data['Leq'] * 2.56 * data['std_dev']
+
+# Save processed data
+data.to_csv('data/processed_noise_data.csv', index=False)
+
+# Summary statistics
+print(data.describe())
