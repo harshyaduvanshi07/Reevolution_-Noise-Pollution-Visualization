@@ -1,0 +1,11 @@
+Location,Category,Latitude,Longitude,Noise_Level
+Thane,Commercial Zone,19.01594,72.85816,85
+Vashi,Silence Zone,19.07925,73.00003,55
+Acworth,Silence Zone,19.02095,72.85923,60
+Bandra,Commercial Zone,19.05577,72.83039,80
+MPCB HQ,Commercial Zone,19.11186,73.01217,75
+M&M Kandivali,Industrial Zone,19.20097,72.87004,90
+Ambassador Hotel,Commercial Zone,18.93352,72.82489,78
+L&T Powai,Industrial Zone,19.12175,72.89286,88
+Pepsico Chembur,Residential Zone,19.04803,72.91031,70
+Bisleri Andheri,Industrial Zone,19.11236,72.85525,85
